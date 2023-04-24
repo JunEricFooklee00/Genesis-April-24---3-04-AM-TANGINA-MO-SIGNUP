@@ -80,6 +80,8 @@ main{
   display: grid;
   width: 100%;
   margin: 0 auto;
+  margin-top: 20px;
+  z-index: -1;
 }
 
 /* Modal Job Button */

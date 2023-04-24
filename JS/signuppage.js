@@ -1,16 +1,17 @@
-var Form1 = document.getElementById("form1")
-var Form2 = document.getElementById("form2")
-var Form3 = document.getElementById("form3")
-var Form4 = document.getElementById("form4")
+// var Form1 = document.getElementById("form1")
+// var Form2 = document.getElementById("form2")
+// var Form3 = document.getElementById("form3")
+// var Form4 = document.getElementById("form4")
 
-var Next1 = document.getElementById("Next1")
-var Next2 = document.getElementById("Next2")
-var Back1 = document.getElementById("Back1")
-var Back2 = document.getElementById("Back2")
+// var Next1 = document.getElementById("Next1")
+// var Next2 = document.getElementById("Next2")
+// var Back1 = document.getElementById("Back1")
+// var Back2 = document.getElementById("Back2")
 
-var progress = document.getElementById("progress")
+// var progress = document.getElementById("progress")
 
 let user = document.querySelector(".user")
+let job = document.querySelector(".job")
 let name = document.querySelector(".name")
 let email = document.querySelector(".email")
 let username = document.querySelector(".username")
@@ -91,19 +92,25 @@ function checkUser(){
     if(user.value.match("Choose User Type")){
         user.style = "border-color: red;"
         return false
-    } else {
+    } else if(user.value.match("Employee")){
+        user.style = "border-color: green;"
+        job.style.display = "flex"
+        document.querySelector(".container-fluid")
+        document.querySelector("#form1")
+        if(job.value.match("Choose Job Type")){
+            job.style = "border-color: red;"
+            return false
+        } else{
+            job.style = "border-color: green;"
+            return true
+        }
+    } else if(user.value.match("Client")){
+        job.style.display = "none"
+        document.querySelector(".container-fluid")
+        document.querySelector("#form1")
         user.style = "border-color: green;"
         return true
-    }
-}
-
-function checkUser() {
-    var user = document.getElementById("user").value;
-    if (user === "Employee") {
-        document.getElementById("typeofjob").style.display = "block";
-    } else {
-        document.getElementById("typeofjob").style.display = "none";
-    }
+    } else document.write(404)
 }
 
 function checkName(){
@@ -307,44 +314,257 @@ hide1.onclick = function(){
     show1.style.display = "flex"
 }
 
-Next1.onclick = function(event){
-    if(checkInputFields1() != false){
-        Form1.style.left = "-500px";
-        Form2.style.left = "25px";
-        progress.style.width = "250px";
-    }
-    event.preventDefault();
+
+document.addEventListener("DOMContentLoaded", function() {
+    const NextButtons = document.querySelector(".next");
+  
+    NextButtons.addEventListener("click", function(event) {
+      const current_fs = this.parentNode;
+      const next_fs = this.parentNode.nextElementSibling;
+      const progressBar = document.querySelectorAll("#progressbar li");
+  
+      if (checkInputFields1() != false) {
+
+if (progressBar.length > 0) {
+  progressBar[Array.prototype.indexOf.call(document.querySelectorAll("fieldset"), next_fs)].classList.add("active");
 }
 
-Back1.onclick = function(){
-    Form1.style.left = "25px";
-    Form2.style.left = "500px";
-    progress.style.width = "125px";
-}
+        next_fs.style.display = "block";
+  
+        let opacity = 1;
+        const hideCurrentFieldset = setInterval(function() {
+          opacity -= 0.1;
+          current_fs.style.opacity = opacity;
+  
+          if (opacity <= 0) {
+            clearInterval(hideCurrentFieldset);
+            current_fs.style.display = "none";
+            current_fs.style.position = "relative";
+            next_fs.style.opacity = 1;
+          }
+        }, 60);
+      }
+  
+      event.preventDefault();
+    });
 
-Next2.onclick = function(event){
-    if(checkInputFields2() != false){
-        Form2.style.left = "-500px";
-        Form3.style.left = "25px";
-        progress.style.width = "375px";
-    }
-    event.preventDefault();
-}
+    const NextButtons2 = document.querySelector(".next1");
+  
+    NextButtons2.addEventListener("click", function(event) {
+      const current_fs = this.parentNode;
+      const next_fs = this.parentNode.nextElementSibling;
+      const progressBar = document.querySelectorAll("#progressbar li");
+  
+      if (checkInputFields2() != false) {
+        progressBar[Array.prototype.indexOf.call(document.querySelectorAll("fieldset"), next_fs)].classList.add("active");
+        next_fs.style.display = "block";
+  
+        let opacity = 1;
+        const hideCurrentFieldset = setInterval(function() {
+            opacity -= 0.1;
+          current_fs.style.opacity = opacity;
+  
+          if (opacity <= 0) {
+            clearInterval(hideCurrentFieldset);
+            current_fs.style.display = "none";
+            current_fs.style.position = "relative";
+            next_fs.style.opacity = 1;
+          }
+        }, 60);
+      }
+  
+      event.preventDefault();
+    });
 
-Back2.onclick = function(){
-    Form2.style.left = "25px";
-    Form3.style.left = "500px";
-    progress.style.width = "250px";
-}
+    var current_fs, next_fs, previous_fs; //fieldsets
+    var opacity;
+    const prevButtons = document.querySelector(".back1");
+        prevButtons.addEventListener("click", function() {
 
-// {{!-- Next3.onclick = function(){
+            current_fs = this.parentElement;
+            previous_fs = this.parentElement.previousElementSibling;
+
+            //Remove class active
+            var progressbar = document.getElementById("progressbar");
+            var fieldsets = document.querySelectorAll("fieldset");
+            var current_fs_index = Array.prototype.indexOf.call(fieldsets, current_fs);
+            progressbar.querySelectorAll("li")[current_fs_index].classList.remove("active");
+
+            //show the previous fieldset
+            previous_fs.style.display = "block";
+
+            //hide the current fieldset with style
+            var interval = setInterval(function() {
+                opacity = parseFloat(current_fs.style.opacity) || 1;
+                opacity -= 0.1;
+                current_fs.style.opacity = opacity;
+                if (opacity <= 0) {
+                    clearInterval(interval);
+                    current_fs.style.display = "none";
+                    current_fs.style.position = "relative";
+                    previous_fs.style.opacity = 0;
+                    previous_fs.style.display = "block";
+                    var interval2 = setInterval(function() {
+                        opacity += 0.1;
+                        previous_fs.style.opacity = opacity;
+                        if (opacity >= 1) {
+                            clearInterval(interval2);
+                            previous_fs.style.opacity = "";
+                        }
+                    }, 60);
+                }
+            }, 60);
+            event.preventDefault();
+    })
+
+    var current_fs, next_fs, previous_fs; //fieldsets
+    var opacity;
+    const prevButtons2 = document.querySelector(".back2");
+        prevButtons2.addEventListener("click", function() {
+
+            current_fs = this.parentElement;
+            previous_fs = this.parentElement.previousElementSibling;
+
+            //Remove class active
+            var progressbar = document.getElementById("progressbar");
+            var fieldsets = document.querySelectorAll("fieldset");
+            var current_fs_index = Array.prototype.indexOf.call(fieldsets, current_fs);
+            progressbar.querySelectorAll("li")[current_fs_index].classList.remove("active");
+
+            //show the previous fieldset
+            previous_fs.style.display = "block";
+
+            //hide the current fieldset with style
+            var interval = setInterval(function() {
+                opacity = parseFloat(current_fs.style.opacity) || 1;
+                opacity -= 0.1;
+                current_fs.style.opacity = opacity;
+                if (opacity <= 0) {
+                    clearInterval(interval);
+                    current_fs.style.display = "none";
+                    current_fs.style.position = "relative";
+                    previous_fs.style.opacity = 0;
+                    previous_fs.style.display = "block";
+                    var interval2 = setInterval(function() {
+                        opacity += 0.1;
+                        previous_fs.style.opacity = opacity;
+                        if (opacity >= 1) {
+                            clearInterval(interval2);
+                            previous_fs.style.opacity = "";
+                        }
+                    }, 60);
+                }
+            }, 60);
+            event.preventDefault();
+    })
+
+    
+  });
+
+
+
+
+  
+
+
+// Back1.onclick = function(){
+//     Form1.style.left = "25px";
+//     Form2.style.left = "500px";
+//     progress.style.width = "125px";
+// }
+
+// Next2.onclick = function(event){
+//     if(checkInputFields2() != false){
+//         Form2.style.left = "-500px";
+//         Form3.style.left = "25px";
+//         progress.style.width = "375px";
+//     }
+//     event.preventDefault();
+// }
+
+// Back2.onclick = function(){
+//     Form2.style.left = "25px";
+//     Form3.style.left = "500px";
+//     progress.style.width = "250px";
+// }
+
+// Next3.onclick = function(){
 //     Form3.style.left = "-500px";
 //     Form4.style.left = "25px";
 //     progress.style.width = "500px";
-// } --}}
+// }
 
-Back3.onclick = function(){
-    Form3.style.left = "25px";
-    Form4.style.left = "500px";
-    progress.style.width = "375px";
-}
+// Back3.onclick = function(){
+//     Form3.style.left = "25px";
+//     Form4.style.left = "500px";
+//     progress.style.width = "375px";
+// }
+
+    // $(document).ready(function(){
+        
+    //     var current_fs, next_fs, previous_fs; //fieldsets
+    //     var opacity;
+        
+    //     $(".next").click(function(){
+            
+    //         current_fs = $(this).parent();
+    //         next_fs = $(this).parent().next();
+            
+    //         //Add Class Active
+    //         $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+            
+    //         //show the next fieldset
+    //         next_fs.show(); 
+    //         //hide the current fieldset with style
+    //         current_fs.animate({opacity: 0}, {
+    //             step: function(now) {
+    //                 // for making fielset appear animation
+    //                 opacity = 1 - now;
+        
+    //                 current_fs.css({
+    //                     'display': 'none',
+    //                     'position': 'relative'
+    //                 });
+    //                 next_fs.css({'opacity': opacity});
+    //             }, 
+    //             duration: 600
+    //         });
+    //     });
+        
+    //     $(".previous").click(function(){
+            
+    //         current_fs = $(this).parent();
+    //         previous_fs = $(this).parent().prev();
+            
+    //         //Remove class active
+    //         $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+            
+    //         //show the previous fieldset
+    //         previous_fs.show();
+        
+    //         //hide the current fieldset with style
+    //         current_fs.animate({opacity: 0}, {
+    //             step: function(now) {
+    //                 // for making fielset appear animation
+    //                 opacity = 1 - now;
+        
+    //                 current_fs.css({
+    //                     'display': 'none',
+    //                     'position': 'relative'
+    //                 });
+    //                 previous_fs.css({'opacity': opacity});
+    //             }, 
+    //             duration: 600
+    //         });
+    //     });
+        
+    //     $('.radio-group .radio').click(function(){
+    //         $(this).parent().find('.radio').removeClass('selected');
+    //         $(this).addClass('selected');
+    //     });
+        
+    //     $(".submit").click(function(){
+    //         return false;
+    //     })
+            
+    //     });

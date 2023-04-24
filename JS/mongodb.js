@@ -22,6 +22,10 @@ const Schema = new mongoose.Schema({
         type:String,
         required:true
     },
+    jobType:{
+        type:String,
+        required:false
+    },
     email:{
         type:String,
         required:true
@@ -35,10 +39,6 @@ const Schema = new mongoose.Schema({
         required:true
     },
     password:{
-        type:String,
-        required:true
-    },
-    confPass:{
         type:String,
         required:true
     },
@@ -59,22 +59,14 @@ const Schema = new mongoose.Schema({
         required:true
     },
     zipcode:{
-        type:String,
+        type:Number,
         required:true
     },
     avatar:{
         type:String,
         required:true
     },
-    cloudinary_id1:{
-        type:String,
-        required:true
-    },
     resume:{
-        type:String,
-        required:true
-    },
-    cloudinary_id2:{
         type:String,
         required:true
     },

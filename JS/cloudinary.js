@@ -1,9 +1,9 @@
 const cloudinary = require('cloudinary').v2;
 
 cloudinary.config({
-    cloud_name: "dpsarrelo",
-    api_key:  "378989546971825",
-    api_secret: "oUP5AxliCqtYnydvs82lsyPv-T0"
+    cloud_name: "dsuuylodx",
+    api_key:  "643975753735143",
+    api_secret: "8lmznwULEA4x8DwBk5LHU-Hg0xw"
 });
 
 module.exports.key = cloudinary; 

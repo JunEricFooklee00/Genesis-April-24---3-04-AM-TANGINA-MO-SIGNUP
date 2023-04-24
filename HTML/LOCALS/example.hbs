@@ -45,9 +45,9 @@
 
             <h3>Sign Up</h3>
 
-            <form  action="/signuppage" method="post">
+            <form  action="/signuppage" method="post" onkeypress="return event.keyCode != 13;">
 
-                <div class="form" id="form1">
+                <div class="form" id="form1" tabindex="-1">
             
                     <div class="form-usertype">
                         <select name="user" id ="user" class="user" value="{{data1.user}}" oninput="checkUser()" style="appearance: none;">
@@ -100,7 +100,7 @@
                     </div>
                 </div>
 
-                <div class="form" id="form2" autocomplete="on">
+                <div class="form" id="form2" style="display: none;" autocomplete="on">
                 
                     <div class="form-bday">
                         <h1 for="birthday" style="font-size: 12px; display: flex; font-weight: normal;">Birthday:</h1>
@@ -158,7 +158,7 @@
                     </div>
                 </div>
 
-                <div class="form" id="form3">
+                <div class="form" id="form3" style="display: none;">
                     <label for="images"> Resume </label>
                         <input type="file" name="images" > <br><br>
                     <label for="image"> Picture </label>
@@ -171,7 +171,7 @@
                 </div>
             </form>
 
-                <form id="form4">
+                <form id="form4" style="display: none;">
                     <p>Success</p>
                     <div class="btn-box">
                         <button type="button" id="Back3">Back</button>

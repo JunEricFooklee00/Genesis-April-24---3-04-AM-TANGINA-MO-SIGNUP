@@ -1,7 +1,7 @@
 let name = document.getElementsByName("name")
 let password = document.getElementsByName("password")
 
-const openModalButtons = document.querySelectorAll("[data-modal-target]")
+const openModalButtons = document.querySelectorAll("[data-modal-target='#login']")
 const closeModalButtons = document.querySelectorAll("[data-close-button]")
 const overlay = document.getElementById("overlay")
 const error = document.getElementById("error")
